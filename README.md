@@ -25,4 +25,14 @@ npm publish
 ```
 
 That's it!
+
+## schematics
+
+### Form
+Gera um formulário com os campos passados como argumento.
+
+ng generate util-schema:form --name=ada4 --campo=Nome
+
+Para mais de um campo
  
+ng generate util-schema:form --name=ada4 --campo=Nome --campo=Email

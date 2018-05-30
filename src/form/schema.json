@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "FormSchema",
+  "title": "Form Schema",
+  "type": "object",
+  "properties": {
+    "index": {
+      "type": "number",
+      "default": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "campo" :{
+      "type": "array"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
