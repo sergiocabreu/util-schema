@@ -1,0 +1,7 @@
+<p>
+  <%= name %> works!
+
+  <mat-form-field *ngFor="campo of <%= inputs %>">
+      <input matInput placeholder="${campo}" formControlName=${strings.camelize(campo)} >
+  </mat-form-field>;
+</p>

@@ -1,28 +1,41 @@
-import { Rule, SchematicContext, Tree, chain, mergeWith, apply, template, url
+
+import { strings } from '@angular-devkit/core';
+import { Rule, SchematicContext, Tree, chain, mergeWith, apply, template, url, move, branchAndMerge
 } from '@angular-devkit/schematics';
+import { montarMatFormFields } from  './utils/angular-material-tags';
 
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
 export function form(options: any): Rule {
-  return chain([
-    (_tree: Tree, context: SchematicContext) => {
-      // Show the options for this Schematics.
-      context.logger.info('My Full Schematic: ' + JSON.stringify(options));
-    },
-  
-    mergeWith(apply(url('./files'), [
+  return (host: Tree, context: SchematicContext) => {
+
+    context.logger.info('(options) : ' + JSON.stringify(options));
+
+    setupOptions(options);
+
+    const templateSource = apply(url('./files'), [
       template({
-        name: options.name,
+        ...strings,
+        ...options
       }),
-    ])),
-  ]);
+      move(options.path || '')
+    ]);
+
+
+    const rule = chain([
+      branchAndMerge(chain([
+        mergeWith(templateSource)
+      ]))
+    ]);
+
+    return rule(host, context);
+  }
 }
 
-/*  return (tree: Tree, _context: SchematicContext) => {
+function setupOptions(options: any) {
+  options.path = `src/app/${options.name}`;
 
-    options.path = options.path ? normalize(options.path) : options.path;
+  montarMatFormFields(options);
 
-    tree.create(options.name || 'hello', JSON.stringify(options));
-  };*/
-
+}

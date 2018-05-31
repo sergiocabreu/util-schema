@@ -4,14 +4,16 @@
   "title": "Form Schema",
   "type": "object",
   "properties": {
-    "index": {
-      "type": "number",
-      "default": 1
-    },
     "name": {
       "type": "string"
     },
-    "campo" :{
+    "path": {
+        "type": "string",
+        "format": "path",
+        "description": "The path to create the component.",
+        "visible": false
+    },    
+    "inputs" :{
       "type": "array"
     }
   },
